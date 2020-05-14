@@ -3,9 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:qrapp/history_page.dart';
 import 'package:qrapp/scanning_page.dart';
+import 'push_notification.dart';
+
 
 
 class GridDashboard extends StatelessWidget {
+  PushNotificationsManager _pushNoti = PushNotificationsManager();
+
   Item item1 = new Item(
     title: "Create",
     img: "assets/qrcode.png",
@@ -38,7 +42,8 @@ class GridDashboard extends StatelessWidget {
         mainAxisSpacing: 8,
         children: myItem.map((data){
           return GestureDetector(
-            onTap: () {
+            onTap: () async {
+              _pushNoti.init();
               Navigator.push(context,MaterialPageRoute(builder: (context)=> Scanning()));
             },
             child: Container(
@@ -65,7 +70,7 @@ class GridDashboard extends StatelessWidget {
   }
 }
 
-class Item {
+class Item{
   String title;
   String img;
 
